@@ -1,13 +1,37 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: sans-serif;
+  background: linear-gradient(276deg, #104b58, #6e8590, #abacac, #cecece);
+  background-size: 800% 800%;
+
+  -webkit-animation: AnimationName 24s ease infinite;
+  -moz-animation: AnimationName 24s ease infinite;
+  animation: AnimationName 24s ease infinite;
+  
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* .css-selector {
+  background: linear-gradient(276deg, #104b58, #6e8590, #abacac, #cecece);
+  background-size: 800% 800%;
+
+  -webkit-animation: AnimationName 24s ease infinite;
+  -moz-animation: AnimationName 24s ease infinite;
+  animation: AnimationName 24s ease infinite;
+} */
+
+@-webkit-keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 51%}
+  100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 51%}
+  100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 51%}
+  100%{background-position:0% 50%}
 }
