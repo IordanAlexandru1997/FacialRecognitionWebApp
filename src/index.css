@@ -2,36 +2,40 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: linear-gradient(276deg, #104b58, #6e8590, #abacac, #cecece);
-  background-size: 800% 800%;
+  background: linear-gradient(270deg, #ddeeff, #9aa6b2, #767c9b);
+  background-size: 600% 600%;
 
-  -webkit-animation: AnimationName 24s ease infinite;
-  -moz-animation: AnimationName 24s ease infinite;
-  animation: AnimationName 24s ease infinite;
+  font-family: 'Grape Nuts', cursive;
+  font-family: 'Patrick Hand', cursive;
+
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
   
 }
 
-/* .css-selector {
-  background: linear-gradient(276deg, #104b58, #6e8590, #abacac, #cecece);
-  background-size: 800% 800%;
-
-  -webkit-animation: AnimationName 24s ease infinite;
-  -moz-animation: AnimationName 24s ease infinite;
-  animation: AnimationName 24s ease infinite;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Patrick+Hand&display=swap');
+p {
+  font-size: 50px;
+  text-align: center;
+  
+}
+button {
+  cursor: pointer;
+}
 
 @-webkit-keyframes AnimationName {
   0%{background-position:0% 50%}
-  50%{background-position:100% 51%}
+  50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 @-moz-keyframes AnimationName {
   0%{background-position:0% 50%}
-  50%{background-position:100% 51%}
+  50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 @keyframes AnimationName {
   0%{background-position:0% 50%}
-  50%{background-position:100% 51%}
+  50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
