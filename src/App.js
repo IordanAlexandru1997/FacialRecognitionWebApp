@@ -5,6 +5,7 @@ import Navigation from './components/navigation/Navigation';
 import Logo from './components/logo/Logo';
 import FaceRecognition from './components/faceRecognition/FaceRecognition';
 import Rank from './components/rank/Rank';
+import Signin from './components/signin/Signin';
 import ImageLinkForm from './components/imageLinkForm/ImageLinkForm';
 import Particless from './components/particles/Particless';
 
@@ -20,6 +21,8 @@ class App extends Component {
       input: '',
       imageUrl: '',
       box:[],
+      vals:[],
+      route: 'signin',
     }
   }
 
@@ -40,7 +43,8 @@ class App extends Component {
       }
       arr.push(obj)
     });
-    return arr;
+    this.setState({vals:[pplArr[0].data,pplArr[pplArr.length-1].data]})
+    return (arr);
   }
 
   onInputChange = (event) => {
@@ -55,16 +59,24 @@ class App extends Component {
 
     .catch(err => console.log(err))
   }
+  
+  onRouteChange = (route) =>{
+    this.setState({route:route})
+  }
+
   render () {
     return(
       <div>
         <Particless/>
-        <Navigation />
-        <Logo />
+        <Navigation onRouteChange={this.onRouteChange}/>
+        { this.state.route === 'signin' 
+        ? <Signin onRouteChange = {this.onRouteChange}/> 
+        : <div><Logo />
         <Rank />
         <ImageLinkForm onInputChange={this.onInputChange} onButtonAction={this.onButtonAction} box={this.state.box}/>
-        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
-      </div>
+        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} vals = {this.state.vals}/>
+        </div>}
+        </div>
     )
   }
 }
