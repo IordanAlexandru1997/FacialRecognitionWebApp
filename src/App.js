@@ -6,6 +6,7 @@ import Logo from './components/logo/Logo';
 import FaceRecognition from './components/faceRecognition/FaceRecognition';
 import Rank from './components/rank/Rank';
 import Signin from './components/signin/Signin';
+import Register from './components/register/Register';
 import ImageLinkForm from './components/imageLinkForm/ImageLinkForm';
 import Particless from './components/particles/Particless';
 
@@ -23,8 +24,28 @@ class App extends Component {
       box:[],
       vals:[],
       route: 'signin',
+      isSignedIn: false,
+      user :
+        {
+          id:'',
+          name: '',
+          email: '',
+          entries: 0,
+          joined: ''
+        }
     }
   }
+
+  loadUser = (data) => {
+    this.setState({user:{
+      id:data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.entries,
+      joined: data.joined
+    }})
+    }
+  
 
   calculateFaceLocation = (data) =>{
     let arr = []
@@ -55,27 +76,51 @@ class App extends Component {
     this.setState({imageUrl:this.state.input})
   
     app.models.predict(Clarifai.FACE_DETECT_MODEL,this.state.input)
-    .then(response =>this.setState({box : this.calculateFaceLocation(response)}))
+    .then(response =>{ 
+      if(response){
+        fetch('http://localhost:3000/image',{
+          method: 'put',
+          headers: {'Content-type':'application/json'},
+          body:JSON.stringify({
+              id:this.state.user.id,
+          })
+        })
+        .then(response => response.json())
+        .then(count =>{
+          this.setState(Object.assign(this.state.user,{entries:count}))
+        })
+      }
+      this.setState({box : this.calculateFaceLocation(response)})}
+     )
 
     .catch(err => console.log(err))
   }
   
   onRouteChange = (route) =>{
+    if (route === 'signout'){
+      this.setState({isSignedIn: false});
+      this.setState({route:'signout'});
+    }else if (route === 'home'){
+      this.setState({isSignedIn: true})
+    }
     this.setState({route:route})
   }
 
   render () {
+    const {isSignedIn, imageUrl,route,box,vals} = this.state;
     return(
       <div>
         <Particless/>
-        <Navigation onRouteChange={this.onRouteChange}/>
-        { this.state.route === 'signin' 
-        ? <Signin onRouteChange = {this.onRouteChange}/> 
-        : <div><Logo />
-        <Rank />
-        <ImageLinkForm onInputChange={this.onInputChange} onButtonAction={this.onButtonAction} box={this.state.box}/>
-        <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} vals = {this.state.vals}/>
-        </div>}
+        <Navigation route={this.state.route} onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
+        { route === 'home' 
+        ? <div><Logo />
+        <Rank name={this.state.user.name} entries={this.state.user.entries}/> 
+        <ImageLinkForm onInputChange={this.onInputChange} onButtonAction={this.onButtonAction} box={box}/>
+        <FaceRecognition box={box} imageUrl={imageUrl} vals = {vals}/>
+        </div>
+        : (route === 'signin' ? <Signin loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/>  
+            :( route ==='signout' ? <Signin loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/> : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> ) ) 
+         }
         </div>
     )
   }

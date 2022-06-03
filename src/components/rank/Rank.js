@@ -2,14 +2,14 @@
 import './Rank.css'
 
 
-const Rank = () => {
+const Rank = ({name,entries}) => {
     return (
        <div className='container-rank'>
            <div className="white f3 tc">
-                {'Alex, your current Rank is ...'}
+                {`Heya ${name}, your current Rank is `}
            </div>
            <div className="white f1 tc">
-                {'#5'}
+                {`${entries}`}
            </div>
        </div>
     )
