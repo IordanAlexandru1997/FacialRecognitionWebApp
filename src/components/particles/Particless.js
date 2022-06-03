@@ -37,7 +37,7 @@ const Particless = () => {
             onHover: {
               enable: true,
               mode: "attract",
-              parallax: { enable: false, force: 60, smooth: 10 }
+              parallax: { enable: false, force: 1000, smooth: 10 }
             },
             resize: true,
           },
@@ -50,7 +50,7 @@ const Particless = () => {
           color: { value: "#2D363B" },
           line_linked: {
             color: "#367499",
-            distance: 150,
+            distance: 100,
             enable: true,
             opacity: 0.4,
             width: 1
@@ -65,7 +65,7 @@ const Particless = () => {
             speed: 2,
             straight: false
           },
-          number: { density: { enable: true, value_area: 800 }, value: 80 },
+          number: { density: { enable: true, value_area: 1000 }, value: 80 },
           opacity: {
             anim: { enable: false, opacity_min: 0.1, speed: 1, sync: false },
             random: false,

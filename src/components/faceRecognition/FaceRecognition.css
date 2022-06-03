@@ -1,8 +1,42 @@
-.bounding-box{
+.red{
     position: absolute;
-    box-shadow: 0 0 0 3px #149df2 inset;
+    box-shadow: 0 0 0 1px #e70a0a inset;
     display: flex;
     flex-wrap:  wrap;
     justify-content: center;
     cursor: pointer;
 }
+.green{
+    position: absolute;
+    box-shadow: 0 0 0 1px #41a100 inset;
+    display: flex;
+    flex-wrap:  wrap;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.blue{
+    position: absolute;
+    box-shadow: 0 0 0 1px #0936ca inset;
+    display: flex;
+    flex-wrap:  wrap;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+p{
+    font-size: 100%;
+    color:black;
+    border-radius: 1rem;
+    border-color: white;
+}
+
+.zoom {
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
