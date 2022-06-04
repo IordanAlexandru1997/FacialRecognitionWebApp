@@ -23,12 +23,14 @@ const Particless = () => {
       init={particlesInit}
       loaded={particlesLoaded}
       options={{
+        
         "particles": {
+          "fpsLimit":120,
           "number": {
-            "value": 160,
+            "value": 100,
             "density": {
               "enable": true,
-              "value_area": 800
+              "value_area": 1000
             }
           },
           "color": {
@@ -67,9 +69,9 @@ const Particless = () => {
           },
           "line_linked": {
             "enable": true,
-            "distance": 150,
+            "distance": 160,
             "color": "#367499",
-            "opacity": 0.4,
+            "opacity": 0.5,
             "width": 1
           },
           "move": {
