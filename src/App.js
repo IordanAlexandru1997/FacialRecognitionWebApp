@@ -73,7 +73,7 @@ class App extends Component {
   onButtonAction = () =>{
     this.setState({imageUrl:this.state.input})
     
-    fetch('https://secure-bastion-47263.herokuapp.com/',{
+    fetch('https://secure-bastion-47263.herokuapp.com/imageurl',{
           method: 'post',
           headers: {'Content-type':'application/json'},
           body:JSON.stringify({
@@ -81,7 +81,7 @@ class App extends Component {
           })}).then(response=>response.json())
     .then(response =>{ 
       if(response){
-        fetch('https://secure-bastion-47263.herokuapp.com',{
+        fetch('https://secure-bastion-47263.herokuapp.com/image',{
           method: 'put',
           headers: {'Content-type':'application/json'},
           body:JSON.stringify({
@@ -120,7 +120,7 @@ class App extends Component {
         <Rank name={this.state.user.name} entries={this.state.user.entries}/> 
         <ImageLinkForm onInputChange={this.onInputChange} onButtonAction={this.onButtonAction} box={box}/>
         <FaceRecognition box={box} imageUrl={imageUrl} vals = {vals}/>
-        </div>
+          </div>
         : (route === 'signin' ? <Signin loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/>  
             :( route ==='signout' ? <Signin loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/> : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> ) ) 
          }
