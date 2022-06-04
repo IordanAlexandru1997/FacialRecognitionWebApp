@@ -25,10 +25,10 @@ const Particless = () => {
       options={{
         "particles": {
           "number": {
-            "value": 400,
+            "value": 160,
             "density": {
               "enable": true,
-              "value_area": 2000
+              "value_area": 800
             }
           },
           "color": {
