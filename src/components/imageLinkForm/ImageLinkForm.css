@@ -11,15 +11,12 @@
 .central-items{
     display: flex;
     justify-content: center;
-    width:50%;
+    width:50vw;
     margin: 0 auto;
-
-    
+  
 }
 
-
 .form {
-    width: 700px;
     background-color:#def;
     background-image: radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%),
     radial-gradient(closest-side, transparent 98%, rgba(0,0,0,.3) 99%);
@@ -86,4 +83,36 @@
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
+}
+
+
+@media screen and (max-width: 540px) {
+    .central-items{
+        display: flex;
+        justify-content: center;
+        width:90vw;
+        margin: 0 auto;
+      
+    }
+   
+}
+
+@media screen and (min-width: 540px) and (max-width: 780px) {
+    .central-items{
+        display: flex;
+        justify-content: center;
+        width:80vw;
+        margin: 0 auto;
+      
+    }
+}
+
+@media screen and (min-width: 780px) and (max-width: 1080px) {
+    .central-items{
+        display: flex;
+        justify-content: center;
+        width:70vw;
+        margin: 0 auto;
+      
+    }
 }
