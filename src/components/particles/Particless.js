@@ -1,5 +1,6 @@
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
+import './Particles.css'
 
 const Particless = () => {
   const particlesInit = async (main) => {
@@ -22,90 +23,116 @@ const Particless = () => {
       init={particlesInit}
       loaded={particlesLoaded}
       options={{
-        // background: {
-        //   color: {
-        //     value: "#0d47a1",
-        //   },
-        // },
-        fpsLimit: 120,
-        interactivity: {
-          events: {
-            onClick: {
-              enable: true,
-              mode: "push",
-            },
-            onHover: {
-              enable: true,
-              mode: "attract",
-              parallax: { enable: false, force: 1000, smooth: 10 }
-            },
-            resize: true,
+        "particles": {
+          "number": {
+            "value": 400,
+            "density": {
+              "enable": true,
+              "value_area": 2000
+            }
           },
-          modes: {
-            push: { quantity: 4 },
-            attract: { distance: 200, duration: 0.4, factor: 5 }
+          "color": {
+            "value": "#2D363B"
+          },
+          "shape": {
+            "type": "circle",
+            "stroke": {
+              "width": 0,
+              "color": "#000000"
+            },
+            "polygon": {
+              "nb_sides": 5
+            },
+
+          },
+          "opacity": {
+            "value": 0.5,
+            "random": false,
+            "anim": {
+              "enable": false,
+              "speed": 1,
+              "opacity_min": 0.1,
+              "sync": false
+            }
+          },
+          "size": {
+            "value": 5,
+            "random": true,
+            "anim": {
+              "enable": false,
+              "speed": 40,
+              "size_min": 0.1,
+              "sync": false
+            }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#367499",
+            "opacity": 0.4,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 2,
+            "direction": "none",
+            "random": false,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+              "enable": false,
+              "rotateX": 600,
+              "rotateY": 1200
+            }
           }
         },
-        particles: {
-          color: { value: "#2D363B" },
-          line_linked: {
-            color: "#367499",
-            distance: 100,
-            enable: true,
-            opacity: 0.4,
-            width: 1
-          },
-          move: {
-            attract: { enable: false, rotateX: 600, rotateY: 1200 },
-            bounce: false,
-            direction: "none",
-            enable: true,
-            out_mode: "out",
-            random: false,
-            speed: 2,
-            straight: false
-          },
-          number: { density: { enable: true, value_area: 1000 }, value: 80 },
-          opacity: {
-            anim: { enable: false, opacity_min: 0.1, speed: 1, sync: false },
-            random: false,
-            value: 0.5
-          },
-          shape: {
-            character: {
-              fill: false,
-              font: "Verdana",
-              style: "",
-              value: "*",
-              weight: "400"
+        "interactivity": {
+          "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "grab"
             },
-            image: {
-              height: 100,
-              replace_color: true,
-              src: "images/github.svg",
-              width: 100
+            "onclick": {
+              "enable": true,
+              "mode": "push"
             },
-            polygon: { nb_sides: 5 },
-            stroke: { color: "#000000", width: 0 },
-            type: "circle"
+            "resize": true
           },
-          size: {
-            anim: { enable: false, size_min: 0.1, speed: 40, sync: false },
-            random: true,
-            value: 5
+          "modes": {
+            "grab": {
+              "distance": 140,
+              "line_linked": {
+                "opacity": 1
+              }
+            },
+            "bubble": {
+              "distance": 400,
+              "size": 40,
+              "duration": 2,
+              "opacity": 8,
+              "speed": 3
+            },
+            "repulse": {
+              "distance": 200,
+              "duration": 0.4
+            },
+            "push": {
+              "particles_nb": 4
+            },
+            "remove": {
+              "particles_nb": 2
+            }
           }
         },
-        polygon: {
-          draw: { enable: false, lineColor: "#ffffff", lineWidth: 0.5 },
-          move: { radius: 10 },
-          scale: 1,
-          type: "none",
-          url: ""
-        },
-        retina_detect: true
+        "retina_detect": true
+        
       }}
+      
     />
+    
   );
+  
 };
 
 export default Particless;
