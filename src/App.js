@@ -2,7 +2,7 @@
 import './App.css';
 import {Component} from 'react';
 import Navigation from './components/navigation/Navigation';
-import Logo from './components/logo/Logo.js';
+import Logo from './components/logo/logo.js';
 import FaceRecognition from './components/faceRecognition/FaceRecognition';
 import Rank from './components/rank/Rank';
 import Signin from './components/signin/Signin';
