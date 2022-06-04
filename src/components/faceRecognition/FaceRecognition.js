@@ -29,7 +29,6 @@ const FaceRecognition = ({imageUrl, box=[], vals}) => {
            return renderColor(boxCoords,idx,'green',vals)
         }
         else if(idx===(nr-1)){
-            console.log('Daaaaaaaaaaaaaa')
            return renderColor(boxCoords,idx,'red',vals)
         }
         else{

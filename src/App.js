@@ -10,30 +10,28 @@ import Register from './components/register/Register';
 import ImageLinkForm from './components/imageLinkForm/ImageLinkForm';
 import Particless from './components/particles/Particless';
 
-import Clarifai from 'clarifai';
 
-const app = new Clarifai.App({
-  apiKey: '9b2d44293f9647a1a8967db60290b4a5'
-})
+
+const initialState = {
+  input: '',
+  imageUrl: '',
+  box:[],
+  vals:[],
+  route: 'signin',
+  isSignedIn: false,
+  user :
+    {
+      id:'',
+      name: '',
+      email: '',
+      entries: 0,
+      joined: ''
+    }
+}
 class App extends Component {
   constructor(){
     super();
-    this.state = {
-      input: '',
-      imageUrl: '',
-      box:[],
-      vals:[],
-      route: 'signin',
-      isSignedIn: false,
-      user :
-        {
-          id:'',
-          name: '',
-          email: '',
-          entries: 0,
-          joined: ''
-        }
-    }
+    this.state = initialState
   }
 
   loadUser = (data) => {
@@ -74,11 +72,16 @@ class App extends Component {
 
   onButtonAction = () =>{
     this.setState({imageUrl:this.state.input})
-  
-    app.models.predict(Clarifai.FACE_DETECT_MODEL,this.state.input)
+    
+    fetch('https://secure-bastion-47263.herokuapp.com/',{
+          method: 'post',
+          headers: {'Content-type':'application/json'},
+          body:JSON.stringify({
+              input:this.state.input,
+          })}).then(response=>response.json())
     .then(response =>{ 
       if(response){
-        fetch('http://localhost:3000/image',{
+        fetch('https://secure-bastion-47263.herokuapp.com',{
           method: 'put',
           headers: {'Content-type':'application/json'},
           body:JSON.stringify({
@@ -89,6 +92,7 @@ class App extends Component {
         .then(count =>{
           this.setState(Object.assign(this.state.user,{entries:count}))
         })
+        .catch(console.log)
       }
       this.setState({box : this.calculateFaceLocation(response)})}
      )
@@ -98,8 +102,7 @@ class App extends Component {
   
   onRouteChange = (route) =>{
     if (route === 'signout'){
-      this.setState({isSignedIn: false});
-      this.setState({route:'signout'});
+      this.setState(initialState);
     }else if (route === 'home'){
       this.setState({isSignedIn: true})
     }
