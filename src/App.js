@@ -11,7 +11,6 @@ import ImageLinkForm from './components/imageLinkForm/ImageLinkForm';
 import Particless from './components/particles/Particless';
 
 
-
 const initialState = {
   input: '',
   imageUrl: '',
@@ -19,6 +18,7 @@ const initialState = {
   vals:[],
   route: 'signin',
   isSignedIn: false,
+  isParticle: true,
   user :
     {
       id:'',

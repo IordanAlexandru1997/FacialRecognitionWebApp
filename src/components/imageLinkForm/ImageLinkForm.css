@@ -66,6 +66,9 @@
 .glow-on-hover:hover:before {
     opacity: 1;
 }
+.chenar {
+    border-radius: 15px;
+}
 
 .glow-on-hover:after {
     z-index: -1;
