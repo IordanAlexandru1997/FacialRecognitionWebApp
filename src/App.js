@@ -9,8 +9,7 @@ import Signin from './components/signin/Signin';
 import Register from './components/register/Register';
 import ImageLinkForm from './components/imageLinkForm/ImageLinkForm';
 import Particless from './components/particles/Particless';
-
-
+import About from './components/aboutpage/about';
 
 const initialState = {
   input: '',
@@ -19,6 +18,7 @@ const initialState = {
   vals:[],
   route: 'signin',
   isSignedIn: false,
+  isParticle: true,
   user :
     {
       id:'',
@@ -73,7 +73,7 @@ class App extends Component {
   onButtonAction = () =>{
     this.setState({imageUrl:this.state.input})
     
-    fetch('https://secure-bastion-47263.herokuapp.com/imageurl',{
+    fetch('https://facialrecognitionwebapi.herokuapp.com/imageurl',{
           method: 'post',
           headers: {'Content-type':'application/json'},
           body:JSON.stringify({
@@ -81,7 +81,7 @@ class App extends Component {
           })}).then(response=>response.json())
     .then(response =>{ 
       if(response){
-        fetch('https://secure-bastion-47263.herokuapp.com/image',{
+        fetch('https://facialrecognitionwebapi.herokuapp.com/image',{
           method: 'put',
           headers: {'Content-type':'application/json'},
           body:JSON.stringify({
@@ -101,6 +101,11 @@ class App extends Component {
   }
   
   onRouteChange = (route) =>{
+    if (route === 'about'){
+      fetch('https://facialrecognitionwebapi.herokuapp.com/about',{
+        method: 'get'
+      })
+    }
     if (route === 'signout'){
       this.setState(initialState);
     }else if (route === 'home'){
@@ -116,14 +121,16 @@ class App extends Component {
         <Particless/>
         <Navigation route={this.state.route} onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
         { route === 'home' 
-        ? <div><Logo />
+        ? <div><Logo onRouteChange={this.onRouteChange}/>
         <Rank name={this.state.user.name} entries={this.state.user.entries}/> 
-        <ImageLinkForm onInputChange={this.onInputChange} onButtonAction={this.onButtonAction} box={box}/>
+        <ImageLinkForm onInputChange={this.onInputChange} onButtonAction={this.onButtonAction} box={box} onRouteChange = {this.onRouteChange}/>
         <FaceRecognition box={box} imageUrl={imageUrl} vals = {vals}/>
           </div>
-        : (route === 'signin' ? <Signin loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/>  
-            :( route ==='signout' ? <Signin loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/> : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> ) ) 
-         }
+        : (route ==='about' ? <About onRouteChange={this.onRouteChange}/> :
+        (route === 'signin' ? <Signin loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/>  
+            :( route ==='signout' ? <Signin loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/> : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> ) ) ) 
+        }
+
         </div>
     )
   }

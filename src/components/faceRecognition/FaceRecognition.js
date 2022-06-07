@@ -4,7 +4,6 @@ const FaceRecognition = ({imageUrl, box=[], vals}) => {
     let nr = box.length;
     const renderColor = (boxCoords, idx, color,vals) => {
         if (idx===0 || idx === (nr-1)){
-            console.log('nu')
             return (
                 <div key={idx}>
                     <div  className={color} style={{  top: boxCoords.topRow, bottom: boxCoords.bottomRow, left: boxCoords.leftCol, right: boxCoords.rightCol}}>

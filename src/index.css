@@ -1,9 +1,22 @@
+
+
+
+
+* {
+  font-family: 'Patrick Hand', cursive;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
 body {
 	background: linear-gradient(-45deg, #63838d, #6e8cb6, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
 	height: 100vh;
+  
 }
+
+
 
 @keyframes gradient {
 	0% {
@@ -41,8 +54,6 @@ body {
   z-index: -1;
 }
 
-
-@import url('https://fonts.googleapis.com/css2?family=Grape+Nuts&family=Patrick+Hand&display=swap');
 p {
   font-size: 50px;
   text-align: center;
