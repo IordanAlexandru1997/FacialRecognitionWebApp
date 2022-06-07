@@ -4,7 +4,7 @@
   "private": true,
   "engines": {
     "node": "16.15.0",
-    "npm":"8.5.5"
+    "npm": "8.5.5"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -13,9 +13,11 @@
     "clarifai": "^2.9.1",
     "cors": "^2.8.5",
     "react": "^18.1.0",
+    "react-blur": "^1.1.1",
     "react-dom": "^18.1.0",
     "react-parallax-tilt": "^1.7.36",
     "react-scripts": "^4.0.3",
+    "react-tagcloud": "^2.2.0",
     "react-tsparticles": "^2.0.6",
     "serve": "^13.0.2",
     "tachyons": "^4.12.0",
