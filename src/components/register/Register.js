@@ -26,7 +26,6 @@ class Register extends React.Component {
         console.log('Password:', this.state.registerPassword);
 
         fetch('https://facewebappapi.onrender.com/register', {
-            mode: 'no-cors',
             method: 'post',
             headers: {
                 'Content-type': 'application/json'
