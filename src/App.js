@@ -1,6 +1,6 @@
 
 import './App.css';
-import {Component} from 'react';
+import { Component } from 'react';
 import Navigation from './components/navigation/Navigation';
 import Logo from './components/logo/logo.js';
 import FaceRecognition from './components/faceRecognition/FaceRecognition';
@@ -14,38 +14,40 @@ import About from './components/aboutpage/about';
 const initialState = {
   input: '',
   imageUrl: '',
-  box:[],
-  vals:[],
+  box: [],
+  vals: [],
   route: 'signin',
   isSignedIn: false,
   isParticle: true,
-  user :
-    {
-      id:'',
-      name: '',
-      email: '',
-      entries: 0,
-      joined: ''
-    }
+  user:
+  {
+    id: '',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  }
 }
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = initialState
   }
 
   loadUser = (data) => {
-    this.setState({user:{
-      id:data.id,
-      name: data.name,
-      email: data.email,
-      entries: data.entries,
-      joined: data.joined
-    }})
-    }
-  
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined
+      }
+    })
+  }
 
-  calculateFaceLocation = (data) =>{
+
+  calculateFaceLocation = (data) => {
     let arr = []
     const pplArr = data.outputs[0].data.regions
     pplArr.forEach((element, index) => {
@@ -56,82 +58,84 @@ class App extends Component {
 
       let obj = {
         leftCol: clarifaiFace.left_col * width,
-        topRow:  clarifaiFace.top_row * height,
+        topRow: clarifaiFace.top_row * height,
         rightCol: width - (clarifaiFace.right_col * width),
         bottomRow: height - (clarifaiFace.bottom_row * height)
       }
       arr.push(obj)
     });
-    this.setState({vals:[pplArr[0].data,pplArr[pplArr.length-1].data]})
+    this.setState({ vals: [pplArr[0].data, pplArr[pplArr.length - 1].data] })
     return (arr);
   }
 
   onInputChange = (event) => {
-    this.setState({input: event.target.value})
+    this.setState({ input: event.target.value })
   }
 
-  onButtonAction = () =>{
-    this.setState({imageUrl:this.state.input})
-    
-    fetch('https://facialrecognitionwebapi.herokuapp.com/imageurl',{
-          method: 'post',
-          headers: {'Content-type':'application/json'},
-          body:JSON.stringify({
-              input:this.state.input,
-          })}).then(response=>response.json())
-    .then(response =>{ 
-      if(response){
-        fetch('https://facialrecognitionwebapi.herokuapp.com/image',{
-          method: 'put',
-          headers: {'Content-type':'application/json'},
-          body:JSON.stringify({
-              id:this.state.user.id,
+  onButtonAction = () => {
+    this.setState({ imageUrl: this.state.input })
+
+    fetch('https://facewebapp.onrender.com/imageurl', {
+      method: 'post',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({
+        input: this.state.input,
+      })
+    }).then(response => response.json())
+      .then(response => {
+        if (response) {
+          fetch('https://facewebapp.onrender.com/image', {
+            method: 'put',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+              id: this.state.user.id,
+            })
           })
-        })
-        .then(response => response.json())
-        .then(count =>{
-          this.setState(Object.assign(this.state.user,{entries:count}))
-        })
-        .catch(console.log)
+            .then(response => response.json())
+            .then(count => {
+              this.setState(Object.assign(this.state.user, { entries: count }))
+            })
+            .catch(console.log)
+        }
+        this.setState({ box: this.calculateFaceLocation(response) })
       }
-      this.setState({box : this.calculateFaceLocation(response)})}
-     )
+      )
 
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
   }
-  
-  onRouteChange = (route) =>{
-    if (route === 'about'){
-      fetch('https://facialrecognitionwebapi.herokuapp.com/about',{
+
+  onRouteChange = (route) => {
+    if (route === 'about') {
+      fetch('https://facewebapp.onrender.com/about', {
         method: 'get'
       })
     }
-    if (route === 'signout'){
+    if (route === 'signout') {
       this.setState(initialState);
-    }else if (route === 'home'){
-      this.setState({isSignedIn: true})
+    } else if (route === 'home') {
+      this.setState({ isSignedIn: true })
     }
-    this.setState({route:route})
+    this.setState({ route: route })
   }
 
-  render () {
-    const {isSignedIn, imageUrl,route,box,vals} = this.state;
-    return(
+  render() {
+    const { isSignedIn, imageUrl, route, box, vals } = this.state;
+    return (
       <div>
-        <Particless/>
-        <Navigation route={this.state.route} onRouteChange={this.onRouteChange} isSignedIn={isSignedIn}/>
-        { route === 'home' 
-        ? <div><Logo onRouteChange={this.onRouteChange}/>
-        <Rank name={this.state.user.name} entries={this.state.user.entries}/> 
-        <ImageLinkForm onInputChange={this.onInputChange} onButtonAction={this.onButtonAction} box={box} onRouteChange = {this.onRouteChange}/>
-        <FaceRecognition box={box} imageUrl={imageUrl} vals = {vals}/>
+        <Particless />
+        <Navigation route={this.state.route} onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} />
+        {route === 'home'
+          ? <div><Logo onRouteChange={this.onRouteChange} />
+            <Rank name={this.state.user.name} entries={this.state.user.entries} />
+            <ImageLinkForm onInputChange={this.onInputChange} onButtonAction={this.onButtonAction} box={box} onRouteChange={this.onRouteChange} />
+            <FaceRecognition box={box} imageUrl={imageUrl} vals={vals} />
           </div>
-        : (route ==='about' ? <About onRouteChange={this.onRouteChange}/> :
-        (route === 'signin' ? <Signin loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/>  
-            :( route ==='signout' ? <Signin loadUser={this.loadUser} onRouteChange = {this.onRouteChange}/> : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/> ) ) ) 
+          : (route === 'about' ? <About onRouteChange={this.onRouteChange} /> :
+            (route === 'signin' ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+              : (route === 'signout' ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} /> : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />)))
         }
 
-        </div>
+      </div>
     )
   }
 }
