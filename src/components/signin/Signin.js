@@ -18,6 +18,7 @@ class Signin extends React.Component {
 
     onSubmitSignIn = () => {
         fetch('https://facewebappapi.onrender.com/signin', {
+            mode: 'no-cors',
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

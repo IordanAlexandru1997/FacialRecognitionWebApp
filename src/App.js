@@ -76,6 +76,7 @@ class App extends Component {
     this.setState({ imageUrl: this.state.input })
 
     fetch('https://facewebapp.onrender.com/imageurl', {
+      mode: 'no-cors',
       method: 'post',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
@@ -85,6 +86,7 @@ class App extends Component {
       .then(response => {
         if (response) {
           fetch('https://facewebapp.onrender.com/image', {
+            mode: 'no-cors',
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -107,6 +109,7 @@ class App extends Component {
   onRouteChange = (route) => {
     if (route === 'about') {
       fetch('https://facewebapp.onrender.com/about', {
+        mode: 'no-cors',
         method: 'get'
       })
     }
