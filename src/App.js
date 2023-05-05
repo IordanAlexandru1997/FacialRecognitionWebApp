@@ -75,7 +75,7 @@ class App extends Component {
   onButtonAction = () => {
     this.setState({ imageUrl: this.state.input })
 
-    fetch('https://facewebapp.onrender.com/imageurl', {
+    fetch('https://facewebappapi.onrender.com/imageurl', {
       method: 'post',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({
@@ -84,7 +84,7 @@ class App extends Component {
     }).then(response => response.json())
       .then(response => {
         if (response) {
-          fetch('https://facewebapp.onrender.com/image', {
+          fetch('https://facewebappapi.onrender.com/image', {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
