@@ -106,7 +106,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'about') {
-      fetch('https://facewebapp.onrender.com/about', {
+      fetch('https://facewebappapi.onrender.com/about', {
         method: 'get'
       })
     }
