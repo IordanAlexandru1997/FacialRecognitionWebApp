@@ -49,6 +49,7 @@ class App extends Component {
 
   calculateFaceLocation = (data) => {
     let arr = []
+    console.log(data);
     const pplArr = data.outputs[0].data.regions
     pplArr.forEach((element, index) => {
       const clarifaiFace = element.region_info.bounding_box;
@@ -91,11 +92,7 @@ class App extends Component {
               id: this.state.user.id,
             })
           })
-            .then(response => {
-              console.log(response.json());
-              return response.json();
-            }
-            )
+            .then(response => response.json())
             .then(count => {
               this.setState(Object.assign(this.state.user, { entries: count }))
             })
