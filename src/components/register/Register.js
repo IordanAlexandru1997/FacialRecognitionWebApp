@@ -21,7 +21,7 @@ class Register extends React.Component {
         this.setState({ registerPassword: event.target.value })
     }
     onSubmitRegister = () => {
-        console.log('Name:', this.state.registerName);
+        console.log('Name is:', this.state.registerName);
         console.log('Email:', this.state.registerEmail);
         console.log('Password:', this.state.registerPassword);
 
