@@ -12,7 +12,7 @@ import Particless from './components/particles/Particless';
 import About from './components/aboutpage/about';
 
 const initialState = {
-  input: '',
+  input: 'https://img.freepik.com/premium-photo/group-people-posing-photo-with-one-them-has-smile-his-face_577115-4101.jpg',
   imageUrl: '',
   box: [],
   vals: [],
@@ -22,7 +22,7 @@ const initialState = {
   user:
   {
     id: '',
-    name: '',
+    name: '' || 'Guest',
     email: '',
     entries: 0,
     joined: ''
@@ -45,6 +45,7 @@ class App extends Component {
       }
     })
   }
+
 
 
   calculateFaceLocation = (data) => {
@@ -120,7 +121,7 @@ class App extends Component {
   }
 
   render() {
-    const { isSignedIn, imageUrl, route, box, vals } = this.state;
+    const { isSignedIn, imageUrl, route, box, vals, input } = this.state;
     return (
       <div>
         <Particless />
@@ -128,7 +129,7 @@ class App extends Component {
         {route === 'home'
           ? <div><Logo onRouteChange={this.onRouteChange} />
             <Rank name={this.state.user.name} entries={this.state.user.entries} />
-            <ImageLinkForm onInputChange={this.onInputChange} onButtonAction={this.onButtonAction} box={box} onRouteChange={this.onRouteChange} />
+            <ImageLinkForm onInputChange={this.onInputChange} onButtonAction={this.onButtonAction} defaultUrl={input} box={box} onRouteChange={this.onRouteChange} />
             <FaceRecognition box={box} imageUrl={imageUrl} vals={vals} />
           </div>
           : (route === 'about' ? <About onRouteChange={this.onRouteChange} /> :

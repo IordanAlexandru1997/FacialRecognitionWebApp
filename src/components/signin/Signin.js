@@ -33,11 +33,23 @@ class Signin extends React.Component {
             })
     }
     onGuestSignIn = () => {
-        // Here you can set a guest user or just navigate to the home
-        // You might want to set a default user object if your app relies on user data
-        this.props.loadUser({ id:'b@b.com', entries: 0, name: 'Guest', email:'b@b.com', password:'12345678' }); 
-        this.props.onRouteChange('home'); // Navigate to home or guest-specific route
+        fetch('https://facewebappapi.onrender.com/signin', {
+            method: 'post',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({
+                email: 'guest@a.com',
+                password:'12345678'
+            })
+        }).then(response => response.json())
+            .then(user => {
+                if (user.id) {
+                    this.props.loadUser(user);
+                    this.props.onRouteChange('home');
+                }
+            })
     }
+    
+    
     render() {
         const { onRouteChange } = this.props;
         return (
