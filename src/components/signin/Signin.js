@@ -32,6 +32,12 @@ class Signin extends React.Component {
                 }
             })
     }
+    onGuestSignIn = () => {
+        // Here you can set a guest user or just navigate to the home
+        // You might want to set a default user object if your app relies on user data
+        this.props.loadUser({ id:'b@b.com', entries: 0, name: 'Guest', email:'b@b.com', password:'12345678' }); 
+        this.props.onRouteChange('home'); // Navigate to home or guest-specific route
+    }
     render() {
         const { onRouteChange } = this.props;
         return (
@@ -41,6 +47,9 @@ class Signin extends React.Component {
                         <div className="measure ">
                             <fieldset id="sign_up" className=" center-row ba b--transparent ph0 mh0">
                                 <legend className="f1 fw6 ph0 mh0 center">Sign In</legend>
+                                <div className='center'>
+                                <input onClick={this.onGuestSignIn} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="button" value="Continue as Guest"/>
+                                </div>
                                 <div className="mt3 ">
                                     <label className="db fw6 lh-copy f6 tc" htmlFor="email-address">Email</label>
                                     <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
